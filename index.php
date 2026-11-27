@@ -179,45 +179,75 @@
 		
 		<!-- ======== PENCAPAIAN ======== -->
 		
-		<Section id="pencapaian">
-			
-			<!-- Lomba PULDAPII Muslim Edufest 2026 -->
-			<img src="assets/images/poster-puldapii.webp">
-			<h2>Second Place Winner in the Digital Poster Design Competition at PULDAPII Muslim Edufest 2026</h2>
-			<p>
-				Meraih Juara II dalam kategori Desain Poster Digital pada ajang PULDAPII 
-				Muslim Edufest 2026 yang diselenggarakan di ICE BSD City, Tangerang.
-			</p>
-			
-			<!-- Perancang Logo Perpustakaan -->
-			<img src="assets/images/perpustakaan.webp">
-			<h2>Logo Designer</h2>
-			<p>
-				Merancang logo resmi milik Perpustakaan Ibnu Abbas As Salafy pada usia 17 tahun. 
-				Karya tersebut terpilih untuk merepresentasikan identitas visual perpustakaan.
-			</p>
-		</Section>
+		<section class="achievement-section" id="pencapaian">
+			<div class="container">
+				<div class="achievement-list">
+					<!-- Lomba PULDAPII Muslim Edufest 2026 -->
+					<article class="achievement-card achievement-horizontal reveal">
+						<div class="achievement-image">
+							<img src="assets/images/poster-puldapii.webp" alt="Poster PULDAPII Muslim Edufest 2026">
+						</div>
+						<div class="achievement-text">
+							<h2>Second Place Winner in the Digital Poster Design Competition at PULDAPII Muslim Edufest 2026</h2>
+							<p>
+								Meraih Juara II dalam kategori Desain Poster Digital pada ajang PULDAPII 
+								Muslim Edufest 2026 yang diselenggarakan di ICE BSD City, Tangerang.
+							</p>
+						</div>
+					</article>
+					
+					<!-- Perancang Logo Perpustakaan -->
+					<article class="achievement-card achievement-vertical reveal">
+						<div class="achievement-image">
+							<img src="assets/images/perpustakaan.webp" alt="Logo Perpustakaan Ibnu Abbas As Salafy">
+						</div>
+						<div class="achievement-text">
+							<h2>Logo Designer</h2>
+							<p>
+								Merancang logo resmi milik Perpustakaan Ibnu Abbas As Salafy pada usia 17 tahun. 
+								Karya tersebut terpilih untuk merepresentasikan identitas visual perpustakaan.
+							</p>
+						</div>
+					</article>
+
+					<!-- Mindset creative worker -->
+					<blockquote class="achievement-mindset reveal">
+						<p>
+							Dalam pembuatan sebuah desain, visual yang menarik bukan sebagai patokan bahwa desain tersebut baik,
+							sebuah desain harus mampu mempresentasikan ciri khas identitas dari sebuah brand.
+						</p>
+					</blockquote>
+				</div>
+			</div>
+		</section>
 		
 		<!-- ======== GALERI ======== -->
-		<section id="galeri">
-			<img src="assets/gallery/image_2.webp" alt="Gallery">
-			<img src="assets/gallery/image_4.webp" alt="Gallery">
-			<img src="assets/gallery/image_13.webp" alt="Gallery">
-			
-			<img src="assets/gallery/image_1.webp" alt="Gallery">
-			<img src="assets/gallery/image_6.webp" alt="Gallery">
-			<img src="assets/gallery/image_7.webp" alt="Gallery">
-			
-			<img src="assets/gallery/image_3.webp" alt="Gallery">
-			<img src="assets/gallery/image_9.webp" alt="Gallery">
-			<img src="assets/gallery/image_11.webp" alt="Gallery">
-			
-			<img src="assets/gallery/image_5.webp" alt="Gallery">
-			<img src="assets/gallery/image_10.webp" alt="Gallery">
-			<img src="assets/gallery/image_12.webp" alt="Gallery">
-			<img src="assets/gallery/image_14.webp" alt="Gallery">
-			<img src="assets/gallery/image_8.webp" alt="Gallery">
-		</Section>
+		<section class="gallery-section" id="galeri">
+			<div class="container">
+				<h2 class="block-title reveal">Galeri</h2>
+				<?php
+				require_once 'koneksi.php';
+				$galeri = $mysqli->query('SELECT id, nama_pengirim, kategori, jenis FROM galeri ORDER BY id DESC');
+				?>
+				<div class="gallery-grid">
+					<?php if ($galeri && $galeri->num_rows > 0): ?>
+						<?php while ($item = $galeri->fetch_assoc()): ?>
+							<article class="gallery-card reveal">
+								<div class="gallery-card-content">
+									<p class="gallery-category"><?php echo htmlspecialchars($item['kategori']); ?></p>
+									<h3><?php echo htmlspecialchars($item['nama_pengirim']); ?></h3>
+									<p class="gallery-type"><?php echo htmlspecialchars($item['jenis']); ?></p>
+								</div>
+							</article>
+						<?php endwhile; ?>
+					<?php else: ?>
+						<p class="gallery-empty">Belum ada data galeri.</p>
+					<?php endif; ?>
+				</div>
+			</div>
+		</section>
+
+		</section>
 		
 		<Section id="kontak">
 			<img src="assets/images">

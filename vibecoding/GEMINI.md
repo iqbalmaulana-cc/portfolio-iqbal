@@ -9,7 +9,7 @@
 
 Aturan: jangan mengubah, menambah, atau mengarang isi teks di luar perintah. Kalau ada bagian yang kurang (misalnya link Instagram atau nomor WhatsApp), beri placeholder jelas seperti `#LINK-INSTAGRAM` dan beri tahu Iqbal.
 
-## 3. Struktur Halaman (sesuai kerangka)
+## Struktur Halaman (sesuai kerangka)
 Header -> Hero -> Tentang -> Pencapaian -> Galeri -> CTA + Kontak -> Footer
 
 ## Tema desain web
