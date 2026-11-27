@@ -24,7 +24,7 @@ $mysqli->select_db($database);
 $sqlTabelGaleri = "
 	CREATE TABLE IF NOT EXISTS galeri (
 		id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-		nama_pengirim VARCHAR(100) NOT NULL,
+		nama_file VARCHAR(150) NOT NULL,
 		kategori VARCHAR(100) NOT NULL,
 		jenis VARCHAR(100) NOT NULL,
 		PRIMARY KEY (id)
@@ -35,7 +35,7 @@ if (!$mysqli->query($sqlTabelGaleri)) {
 	die('Pembuatan tabel galeri gagal: ' . $mysqli->error);
 }
 
-// Sesuaikan tabel lama jika masih memakai nama kolom nama_file
+// Ubah nama kolom lama agar sesuai dengan struktur yang digunakan sekarang
 $kolomGaleri = $mysqli->query("SHOW COLUMNS FROM galeri");
 $daftarKolom = [];
 
@@ -45,10 +45,8 @@ if ($kolomGaleri) {
 	}
 }
 
-if (!in_array('nama_pengirim', $daftarKolom, true) && in_array('nama_file', $daftarKolom, true)) {
-	$mysqli->query("ALTER TABLE galeri ADD COLUMN nama_pengirim VARCHAR(100) NOT NULL AFTER id");
-	$mysqli->query("UPDATE galeri SET nama_pengirim = nama_file");
-	$mysqli->query("ALTER TABLE galeri DROP COLUMN nama_file");
+if (!in_array('nama_file', $daftarKolom, true) && in_array('nama_pengirim', $daftarKolom, true)) {
+	$mysqli->query("ALTER TABLE galeri CHANGE nama_pengirim nama_file VARCHAR(150) NOT NULL");
 }
 
 // Pastikan kolom kategori dan jenis mendukung teks seperti form

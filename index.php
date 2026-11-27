@@ -227,7 +227,7 @@
 				<h2 class="block-title reveal">Galeri</h2>
 				<?php
 				require_once 'koneksi.php';
-				$galeri = $mysqli->query('SELECT id, nama_pengirim, kategori, jenis FROM galeri ORDER BY id DESC');
+				$galeri = $mysqli->query('SELECT id, nama_file, kategori, jenis FROM galeri ORDER BY id DESC');
 				?>
 				<div class="gallery-grid">
 					<?php if ($galeri && $galeri->num_rows > 0): ?>
@@ -235,7 +235,7 @@
 							<article class="gallery-card reveal">
 								<div class="gallery-card-content">
 									<p class="gallery-category"><?php echo htmlspecialchars($item['kategori']); ?></p>
-									<h3><?php echo htmlspecialchars($item['nama_pengirim']); ?></h3>
+									<h3><?php echo htmlspecialchars($item['nama_file']); ?></h3>
 									<p class="gallery-type"><?php echo htmlspecialchars($item['jenis']); ?></p>
 								</div>
 							</article>

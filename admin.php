@@ -8,6 +8,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/admin.css">
 </head>
 <body class="admin-body">
 <?php
@@ -21,7 +22,7 @@ $jenisPesan = '';
 $editData = null;
 if (isset($_GET['ubah'])) {
 	$idUbah = (int) $_GET['ubah'];
-	$stmt = $mysqli->prepare('SELECT id, nama_pengirim, kategori, jenis FROM galeri WHERE id = ?');
+	$stmt = $mysqli->prepare('SELECT id, nama_file, kategori, jenis FROM galeri WHERE id = ?');
 	$stmt->bind_param('i', $idUbah);
 	$stmt->execute();
 	$result = $stmt->get_result();
@@ -31,17 +32,17 @@ if (isset($_GET['ubah'])) {
 
 // Tambah atau ubah data
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	$namaPengirim = trim($_POST['nama_pengirim'] ?? '');
+	$namaFile = trim($_POST['nama_file'] ?? '');
 	$kategori = trim($_POST['kategori'] ?? '');
 	$jenis = trim($_POST['jenis'] ?? '');
 
-	if ($namaPengirim === '' || $kategori === '' || $jenis === '') {
+	if ($namaFile === '' || $kategori === '' || $jenis === '') {
 		$pesan = 'Semua kolom wajib diisi.';
 		$jenisPesan = 'error';
 	} elseif (isset($_POST['id']) && (int) $_POST['id'] > 0) {
 		$id = (int) $_POST['id'];
-		$stmt = $mysqli->prepare('UPDATE galeri SET nama_pengirim = ?, kategori = ?, jenis = ? WHERE id = ?');
-		$stmt->bind_param('sssi', $namaPengirim, $kategori, $jenis, $id);
+		$stmt = $mysqli->prepare('UPDATE galeri SET nama_file = ?, kategori = ?, jenis = ? WHERE id = ?');
+		$stmt->bind_param('sssi', $namaFile, $kategori, $jenis, $id);
 
 		if ($stmt->execute()) {
 			$pesan = 'Data berhasil diperbarui.';
@@ -54,8 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		header('Location: admin.php?pesan=' . urlencode($pesan) . '&jenis=' . urlencode($jenisPesan));
 		exit;
 	} else {
-		$stmt = $mysqli->prepare('INSERT INTO galeri (nama_pengirim, kategori, jenis) VALUES (?, ?, ?)');
-		$stmt->bind_param('sss', $namaPengirim, $kategori, $jenis);
+		$stmt = $mysqli->prepare('INSERT INTO galeri (nama_file, kategori, jenis) VALUES (?, ?, ?)');
+		$stmt->bind_param('sss', $namaFile, $kategori, $jenis);
 
 		if ($stmt->execute()) {
 			$pesan = 'Data berhasil ditambahkan.';
@@ -86,7 +87,7 @@ if (isset($_GET['pesan'])) {
 	$jenisPesan = $_GET['jenis'] ?? '';
 }
 
-$dataGaleri = $mysqli->query('SELECT id, nama_pengirim, kategori, jenis FROM galeri ORDER BY id DESC');
+$dataGaleri = $mysqli->query('SELECT id, nama_file, kategori, jenis FROM galeri ORDER BY id DESC');
 ?>
 
 <main class="admin-container">
@@ -108,9 +109,9 @@ $dataGaleri = $mysqli->query('SELECT id, nama_pengirim, kategori, jenis FROM gal
 			<?php endif; ?>
 
 			<label>
-				Nama Pengirim
-				<input type="text" name="nama_pengirim" required maxlength="100"
-					value="<?php echo htmlspecialchars($editData['nama_pengirim'] ?? ''); ?>">
+				Nama File
+				<input type="text" name="nama_file" required maxlength="150"
+					value="<?php echo htmlspecialchars($editData['nama_file'] ?? ''); ?>">
 			</label>
 
 			<label>
@@ -143,7 +144,7 @@ $dataGaleri = $mysqli->query('SELECT id, nama_pengirim, kategori, jenis FROM gal
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>Nama Pengirim</th>
+						<th>Nama File</th>
 						<th>Kategori</th>
 						<th>Jenis</th>
 						<th>Aksi</th>
@@ -154,7 +155,7 @@ $dataGaleri = $mysqli->query('SELECT id, nama_pengirim, kategori, jenis FROM gal
 					<?php while ($data = $dataGaleri->fetch_assoc()) : ?>
 						<tr>
 							<td><?php echo (int) $data['id']; ?></td>
-							<td><?php echo htmlspecialchars($data['nama_pengirim']); ?></td>
+							<td><?php echo htmlspecialchars($data['nama_file']); ?></td>
 							<td><?php echo htmlspecialchars($data['kategori']); ?></td>
 							<td><?php echo htmlspecialchars($data['jenis']); ?></td>
 							<td class="admin-row-actions">

@@ -529,142 +529,6 @@ Kelas ini ditambahkan JS saat halaman digulir
 	color: var(--text-muted);
 }
 
-/* ========== DASHBOARD ADMIN ========== */
-.admin-body {
-	min-height: 100vh;
-}
-
-.admin-container {
-	width: min(1100px, 90%);
-	margin: 0 auto;
-	padding: 3rem 0;
-}
-
-.admin-back {
-	display: inline-block;
-	margin-bottom: 1.5rem;
-	color: var(--accent);
-}
-
-.admin-title {
-	font-size: clamp(2rem, 5vw, 3.25rem);
-}
-
-.admin-subtitle {
-	margin-top: 0.5rem;
-	color: var(--text-muted);
-}
-
-.admin-card {
-	margin-top: 1.5rem;
-	padding: 1.5rem;
-	background: var(--surface);
-	border: 1px solid var(--border);
-	border-radius: 14px;
-}
-
-.admin-card h2 {
-	margin-bottom: 1.25rem;
-	font-size: 1.5rem;
-}
-
-.admin-form {
-	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: 1rem;
-}
-
-.admin-form label {
-	display: grid;
-	gap: 0.5rem;
-	font-weight: 600;
-}
-
-.admin-form input {
-	width: 100%;
-	padding: 0.8rem 1rem;
-	color: var(--text);
-	background: var(--bg);
-	border: 1px solid var(--border);
-	border-radius: 8px;
-	font: inherit;
-}
-
-.admin-form input:focus {
-	outline: 1px solid var(--accent);
-	border-color: var(--accent);
-}
-
-.admin-actions {
-	grid-column: 1 / -1;
-	display: flex;
-	gap: 0.75rem;
-}
-
-.admin-btn {
-	padding: 0.75rem 1.25rem;
-	border: 0;
-	border-radius: 8px;
-	font: inherit;
-	cursor: pointer;
-}
-
-.admin-btn.primary {
-	background: var(--accent);
-	color: var(--secondary);
-}
-
-.admin-btn.secondary {
-	background: transparent;
-	border: 1px solid var(--border);
-	color: var(--text);
-}
-
-.admin-alert {
-	margin-top: 1.5rem;
-	padding: 0.75rem 1rem;
-	border-radius: 8px;
-}
-
-.admin-alert.success {
-	background: rgba(255, 167, 51, 0.12);
-	border: 1px solid var(--accent);
-}
-
-.admin-alert.error {
-	background: rgba(255, 100, 100, 0.12);
-	border: 1px solid #ff6464;
-}
-
-.admin-table-wrap {
-	overflow-x: auto;
-}
-
-.admin-table {
-	width: 100%;
-	border-collapse: collapse;
-}
-
-.admin-table th,
-.admin-table td {
-	padding: 0.85rem;
-	border-bottom: 1px solid var(--border);
-	text-align: left;
-}
-
-.admin-row-actions {
-	display: flex;
-	gap: 0.75rem;
-}
-
-.admin-row-actions a {
-	color: var(--accent);
-}
-
-.admin-row-actions .delete {
-	color: #ff8a8a;
-}
-
 @media (max-width: 800px) {
 	.achievement-horizontal {
 		grid-template-columns: 1fr;
@@ -683,13 +547,6 @@ Kelas ini ditambahkan JS saat halaman digulir
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 
-	.admin-form {
-		grid-template-columns: 1fr;
-	}
-
-	.admin-actions {
-		grid-column: 1;
-	}
 }
 
 @media (max-width: 520px) {
@@ -697,8 +554,4 @@ Kelas ini ditambahkan JS saat halaman digulir
 		grid-template-columns: 1fr;
 	}
 
-	.admin-container {
-		width: 92%;
-		padding-top: 2rem;
-	}
 }
