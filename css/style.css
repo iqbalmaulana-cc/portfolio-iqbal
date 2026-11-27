@@ -491,19 +491,37 @@ Kelas ini ditambahkan JS saat halaman digulir
 }
 
 .gallery-card {
-	min-height: 180px;
-	padding: 1.5rem;
+	overflow: hidden;
 	background: var(--surface);
 	border: 1px solid var(--border);
 	border-radius: 14px;
-	display: flex;
-	align-items: flex-end;
 	transition: transform 0.3s, background 0.3s;
 }
 
 .gallery-card:hover {
 	transform: translateY(-4px);
 	background: var(--surface-2);
+}
+
+.gallery-image {
+	aspect-ratio: 4 / 3;
+	overflow: hidden;
+	background: var(--surface-2);
+}
+
+.gallery-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.4s;
+}
+
+.gallery-card:hover .gallery-image img {
+	transform: scale(1.04);
+}
+
+.gallery-card-content {
+	padding: 1.25rem 1.4rem 1.4rem;
 }
 
 .gallery-category,
@@ -513,15 +531,14 @@ Kelas ini ditambahkan JS saat halaman digulir
 
 .gallery-category {
 	color: var(--accent);
-	margin-bottom: 0.75rem;
+	margin-bottom: 0.4rem;
 	font-size: 0.85rem;
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
 }
 
-.gallery-card h3 {
-	margin-bottom: 0.5rem;
-	font-size: 1.35rem;
+.gallery-type {
+	font-size: 0.95rem;
 }
 
 .gallery-empty {

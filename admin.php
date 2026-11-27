@@ -14,6 +14,18 @@
 <?php
 require_once 'koneksi.php';
 
+// Ambil daftar gambar yang tersedia di folder galeri
+$daftarGambar = [];
+$fileGambar = glob(__DIR__ . '/gallery/*.{jpg,jpeg,png,gif,webp}', GLOB_BRACE);
+
+if ($fileGambar !== false) {
+	foreach ($fileGambar as $file) {
+		if (is_file($file)) {
+			$daftarGambar[] = 'gallery/' . basename($file);
+		}
+	}
+}
+
 // Pesan hasil operasi CRUD
 $pesan = '';
 $jenisPesan = '';
@@ -38,6 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	if ($namaFile === '' || $kategori === '' || $jenis === '') {
 		$pesan = 'Semua kolom wajib diisi.';
+		$jenisPesan = 'error';
+	} elseif (!in_array($namaFile, $daftarGambar, true)) {
+		$pesan = 'Pilih gambar yang tersedia di folder galeri.';
 		$jenisPesan = 'error';
 	} elseif (isset($_POST['id']) && (int) $_POST['id'] > 0) {
 		$id = (int) $_POST['id'];
@@ -109,9 +124,16 @@ $dataGaleri = $mysqli->query('SELECT id, nama_file, kategori, jenis FROM galeri 
 			<?php endif; ?>
 
 			<label>
-				Nama File
-				<input type="text" name="nama_file" required maxlength="150"
-					value="<?php echo htmlspecialchars($editData['nama_file'] ?? ''); ?>">
+				Pilih Gambar
+				<select name="nama_file" required>
+					<option value="">Pilih gambar dari galeri</option>
+					<?php foreach ($daftarGambar as $gambar): ?>
+						<option value="<?php echo htmlspecialchars($gambar, ENT_QUOTES, 'UTF-8'); ?>"
+							<?php echo isset($editData['nama_file']) && $editData['nama_file'] === $gambar ? 'selected' : ''; ?>>
+							<?php echo htmlspecialchars(basename($gambar), ENT_QUOTES, 'UTF-8'); ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
 			</label>
 
 			<label>

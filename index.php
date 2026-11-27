@@ -233,9 +233,13 @@
 					<?php if ($galeri && $galeri->num_rows > 0): ?>
 						<?php while ($item = $galeri->fetch_assoc()): ?>
 							<article class="gallery-card reveal">
+								<div class="gallery-image">
+									<img src="<?php echo htmlspecialchars($item['nama_file'], ENT_QUOTES, 'UTF-8'); ?>"
+										alt="<?php echo htmlspecialchars($item['kategori'] . ' ' . $item['jenis'], ENT_QUOTES, 'UTF-8'); ?>"
+										loading="lazy">
+								</div>
 								<div class="gallery-card-content">
 									<p class="gallery-category"><?php echo htmlspecialchars($item['kategori']); ?></p>
-									<h3><?php echo htmlspecialchars($item['nama_file']); ?></h3>
 									<p class="gallery-type"><?php echo htmlspecialchars($item['jenis']); ?></p>
 								</div>
 							</article>
